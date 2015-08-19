@@ -1,0 +1,46 @@
+<h1>Exercise 3</h1>
+
+<h3>Using templates with a list of data</h3>
+
+<p id="content">
+	
+</p>
+
+<script type="text/javascript">
+
+	var stories = [
+		{
+			name: 'fuck you',
+			story: 'die you stupid fuck'
+		},
+		{
+			name: 'dead rats',
+			story: 'nobody fucking cares'
+		},
+		{
+			name: 'hot trash',
+			story: 'your mom is a shit-eating dog'
+		}
+	];
+
+	$(document).on('ready', function() {
+
+		var storyTemplate = _.template($('#tpl').html());
+
+		for (var i = 0; i < stories.length; i++) {
+			var data = stories[i];
+			$('#content').append(storyTemplate(data));
+		}
+
+	});
+
+</script>
+
+<script type="text/template" id="tpl">
+	
+	<li>
+		<h1><%%= name %></h1>
+		<p><%%= story %></p>
+	</li>
+
+</script>

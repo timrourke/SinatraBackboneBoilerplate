@@ -1,0 +1,20 @@
+<h1>Exercise 1</h1>
+
+<h3>How to break ERB</h3>
+
+<p>Solution: escape Underscore variables with double percent symbols.</p>
+<p>Example: <code><%%= variable %></code>. This prevents the ERB interpreter from mistaking ERB template tags from otherwise identical formatting with Underscores template placeholders.</p>
+
+<script type="text/javascript">
+	
+	$(document).on('ready', function() {
+
+	});
+
+</script>
+
+<script type="text/template">
+	
+	The quick brown <%%= animal %> jumped over the lazy <%%= adjective %>.
+
+</script>
