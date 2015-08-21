@@ -1,0 +1,36 @@
+<h1>Exercise 6</h1>
+
+<h3>Backbone Models</h3>
+
+<secion id="list"></secion>
+
+<script type="text/javascript">
+
+	var movieApp = movieApp || {};
+		
+	movieApp.MovieModel = Backbone.Model.extend({
+		url: 'http://www.omdbapi.com/?t=jane+eyre&y=2011&plot=full&r=json',
+		initialize: function() {
+			this.on('change', function(e) {
+				console.log('The model has changed.');
+				console.log(this.get('Plot'));
+			});
+			this.fetch();
+		}
+	});
+	
+	var janeEyre = new movieApp.MovieModel();
+
+	console.log(janeEyre);
+
+	$(document).on('ready', function() {
+
+		
+
+	});
+
+</script>
+
+<script type="text/template" id="list-template">
+	
+</script>

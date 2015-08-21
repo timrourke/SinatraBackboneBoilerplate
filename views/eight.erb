@@ -1,0 +1,55 @@
+<h1>Exercise 8</h1>
+
+<h3>Rendering Model Attributes with a view</h3>
+
+<div class="movie"></div>
+
+<script type="text/javascript">
+
+	var movieApp = movieApp || {};
+	
+	movieApp.MovieView = Backbone.View.extend({
+		initialize: function() {
+			var self = this;
+			console.log('MoviewView ready.');
+			this.model.on('change', function() {
+				self.render();
+			});
+		},
+		render: function() {
+			var data = this.model.attributes;
+			this.$el.html('<img src="' + data.Poster + '" /><br>Movie: ' + data.Title + ' was released in ' +  data.Year);
+		}
+	});
+
+	movieApp.MovieModel = Backbone.Model.extend({
+		url: 'http://www.omdbapi.com/?t=jane+eyre&y=2011&plot=full&r=json',
+		initialize: function() {
+			this.on('change', function(e) {
+				console.log('The model has changed.');
+				console.log(this.get('Plot'));
+			});
+			this.fetch();
+		}
+	});
+	
+	var janeEyre = new movieApp.MovieModel();
+
+
+
+	console.log(janeEyre);
+
+	$(document).on('ready', function() {
+
+		var movie = new movieApp.MovieView({
+			el: $('.movie'),
+			model: janeEyre
+		});
+
+	});
+
+</script>
+
+<script type="text/template" id="list-template">
+	
+</script>

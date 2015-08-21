@@ -1,0 +1,81 @@
+<style type="text/css">
+	#container {
+		width: 100%;
+	}
+	img {
+		width:100%;
+		height:auto;
+	}
+</style>
+
+<h1>Exercise 4</h1>
+
+<h3>Hello, Backbone! Views, Views Everywhere</h3>
+
+<section id="container">
+	
+</section>
+
+<script type="text/javascript">
+
+
+	$(document).on('ready', function() {
+
+		var app = app || {};
+
+		app.ListItemView = Backbone.View.extend({
+			el: '#container',
+			initialize: function() {
+				this.render();
+			},
+			render: function() {
+				$(this.el).append('<h1>fuck</h1>');
+				return this;
+			}
+		});
+
+		var listItem = new app.ListItemView();
+		
+		app.CaterpillarView = Backbone.View.extend({
+			events: {
+				'click':'sayHi'
+			},
+			initialize: function() {
+				_.bindAll(this, 'render', 'sayHi');
+				this.render();
+			},
+			render: function() {
+				$(this.el).append('<img src="images/caterpillar.png" alt="spirit animal"/>');
+			},
+			sayHi: function() {
+				alert('hi, i\'m a caterpillar!');
+				$(this.el).fadeOut().fadeIn();
+			}
+		});
+
+		var caterpillar = new app.CaterpillarView({
+			el: '#container'
+		});
+
+		app.HamburgerHelmetView = Backbone.View.extend({
+			initialize: function() {
+				_.bindAll(this, 'render');
+				this.render();
+			},
+			render: function() {
+				$(this.el).append('<img src="images/HamburgerHelmet.jpg" alt="YUMMM" />');
+			}
+		});
+
+		var burger = new app.HamburgerHelmetView({
+			el: '#container'
+		});
+
+	});
+
+</script>
+
+<script type="text/template" id="tpl">
+	
+
+</script>

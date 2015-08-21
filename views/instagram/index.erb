@@ -1,0 +1,65 @@
+<h1>Hello from instagram</h1>
+
+<script type="text/javascript">
+	
+	var instagram = instagram || {};
+
+	instagram.PhotoListView = Backbone.View.extend({
+		initialize: function() {
+			_.bindAll(this, 'render', 'appendItem');
+			this.collection = new instagram.Items();
+			this.collection.bind('add', this.appendItem);
+		},
+		render: function() {
+			var self = this;
+			this.$el.append('<h2>Photo List</h2><ul></ul>');
+			console.log(this.collection);
+			_(this.collection.models).each(function(item) {
+				self.$el.appendItem(item);
+				console.log(item);
+			});
+
+		},
+		appendItem: function(item) {
+			this.$el.append( $('<img src="' + item.get('post') + '" />') );
+		}
+	});
+
+	instagram.PhotoView = Backbone.View.extend({
+		initialize: function() {
+			var self = this;
+			
+		},
+		render: function() {
+			var self = this;
+			var data = self.model.attributes;
+			self.$el.html('<li><img src="' + data.post + '" /><br>Description: ' + data.description + '</li>');
+		}
+	});
+
+	instagram.Item = Backbone.Model.extend({
+		initialize: function() {
+			var self = this;
+			console.log('An instagram photo with an ID of ' + this.get('id') + ' was just created.');
+			this.fetch();
+		}
+	});
+
+	instagram.Items = Backbone.Collection.extend({
+		url: '/api/instagram',
+		model: instagram.Item,
+		initialize: function() {
+			console.log('loading collection');
+			this.fetch();
+		}
+		
+	});
+
+	instagram.photoList = new instagram.PhotoListView({
+		el: 'body'
+	});
+
+	instagram.photoList.render();
+
+
+</script>
